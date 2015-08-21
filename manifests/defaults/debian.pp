@@ -11,6 +11,9 @@ class logrotate::defaults::debian {
     create_owner => 'root',
     create_group => 'utmp',
     rotate       => '1',
+    su           => true,
+    su_owner     => 'root',
+    su_group     => 'utmp',
   }
 
   logrotate::rule {
