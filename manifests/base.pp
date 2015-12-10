@@ -27,6 +27,7 @@ class logrotate::base (
     '/etc/logrotate.d':
       ensure  => directory,
       purge   => $purge,
+      recurse => $purge,
       mode    => '0755';
     '/etc/cron.daily/logrotate':
       ensure  => file,
