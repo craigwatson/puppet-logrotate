@@ -3,7 +3,12 @@
 # Examples
 #
 #   include logrotate::base
-class logrotate::base {
+class logrotate::base (
+  $purge = false,
+) {
+
+  validate_bool($purge)
+
   package { 'logrotate':
     ensure => latest,
   }
@@ -21,6 +26,7 @@ class logrotate::base {
       source  => 'puppet:///modules/logrotate/etc/logrotate.conf';
     '/etc/logrotate.d':
       ensure  => directory,
+      purge   => $purge,
       mode    => '0755';
     '/etc/cron.daily/logrotate':
       ensure  => file,
