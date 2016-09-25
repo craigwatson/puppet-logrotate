@@ -1,9 +1,9 @@
-# Internal: Manage the default debian logrotate rules.
+# Internal: Manage the default redhat logrotate rules.
 #
 # Examples
 #
-#   include logrotate::defaults::debian
-class logrotate::defaults::debian {
+#   include logrotate::defaults::redhat
+class logrotate::defaults::redhat {
   Logrotate::Rule {
     missingok    => true,
     rotate_every => 'month',
@@ -16,9 +16,12 @@ class logrotate::defaults::debian {
   logrotate::rule {
     'wtmp':
       path        => '/var/log/wtmp',
-      create_mode => '0664';
+      create_mode => '0664',
+      missingok   => false,
+      minsize     => '1M';
     'btmp':
       path        => '/var/log/btmp',
-      create_mode => '0600';
+      create_mode => '0600',
+      minsize     => '1M';
   }
 }
